@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#120c09">
+  <title>A Letter for Anika</title>
+  <meta name="description" content="A sealed letter, for Anika's 22nd birthday.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%238e1b1b'/%3E%3Ctext x='32' y='43' font-family='Georgia' font-style='italic' font-size='32' text-anchor='middle' fill='%23e9b8a0'%3EA%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Homemade+Apple&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="importmap">
+    { "imports": { "three": "./js/vendor/three.module.min.js" } }
+  </script>
+</head>
+<body data-stage="loading">
+
+  <!-- Loader -->
+  <div class="loader" id="loader" aria-live="polite">
+    <div class="loader__candle"><span class="loader__flame"></span></div>
+    <p class="loader__text">lighting the candle…</p>
+  </div>
+
+  <!-- 3D scene: candlelit desk + envelope, later ambient petals -->
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="paper-flash" id="paperFlash" aria-hidden="true"></div>
+
+  <!-- Hero overlay -->
+  <header class="hero" id="hero">
+    <div class="hero__top">
+      <span class="typed">21 · 10 · 2026</span>
+    </div>
+
+    <div class="hero__title">
+      <p class="hero__kicker" data-text="hero.kicker"></p>
+      <h1 class="hero__name">Anika</h1>
+    </div>
+
+    <div class="hero__panel">
+      <!-- before midnight -->
+      <div class="panel panel--sealed">
+        <p class="panel__title" data-text="hero.sealed"></p>
+        <p class="panel__sub" data-text="hero.sealedSub"></p>
+        <div class="countdown" id="countdown" role="timer" aria-label="Time until the letter unlocks">
+          <div><b data-cd="d">00</b><span>days</span></div>
+          <div><b data-cd="h">00</b><span>hours</span></div>
+          <div><b data-cd="m">00</b><span>min</span></div>
+          <div><b data-cd="s">00</b><span>sec</span></div>
+        </div>
+        <p class="panel__foot" data-text="hero.sealedFoot"></p>
+      </div>
+
+      <!-- the question -->
+      <form class="panel panel--locked" id="lockForm" autocomplete="off">
+        <p class="panel__title" data-text="hero.lockedTitle"></p>
+        <p class="panel__sub" data-text="hero.lockedSub"></p>
+        <label class="question" for="answer" data-text="lock.question"></label>
+        <div class="answer">
+          <input id="answer" name="answer" type="text" spellcheck="false" autocapitalize="off" placeholder="write it here…">
+          <button type="submit" class="btn btn--wax">Break the seal</button>
+        </div>
+        <p class="hint" id="hint" aria-live="polite"></p>
+      </form>
+
+      <!-- already unlocked before -->
+      <div class="panel panel--ready">
+        <p class="panel__title" data-text="hero.readyTitle"></p>
+        <p class="panel__sub" data-text="hero.readySub"></p>
+        <button type="button" class="btn btn--wax" id="openBtn">Open the letter</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- The letter -->
+    <section class="section section--letter" id="letter">
+      <article class="paper letter">
+        <p class="letter__place typed" data-text="letter.place"></p>
+        <h2 class="ink-title" id="inkTitle" aria-label="Happy 22nd birthday, Anika">
+          <svg viewBox="0 0 900 260" role="presentation">
+            <text x="50%" y="100" text-anchor="middle" class="ink-title__l1">Happy 22nd Birthday,</text>
+            <text x="50%" y="228" text-anchor="middle" class="ink-title__l2">Anika</text>
+          </svg>
+        </h2>
+        <p class="letter__greeting" data-text="letter.greeting"></p>
+        <div class="letter__body" id="letterBody"></div>
+        <div class="letter__sign">
+          <span data-text="letter.signoff"></span>
+          <span class="signature" data-text="letter.signature"></span>
+        </div>
+        <svg class="pressed-flower" viewBox="0 0 120 200" aria-hidden="true"><use href="#flower"/></svg>
+      </article>
+      <figure class="side-polaroid" aria-hidden="true">
+        <img src="assets/photos/us-arms-sm.webp" alt="" loading="lazy">
+        <figcaption>us ♡</figcaption>
+      </figure>
+    </section>
+
+    <!-- Photo story -->
+    <section class="section section--story" id="story">
+      <div class="story__intro">
+        <p class="eyebrow">chapter two</p>
+        <h2 class="display" data-text="story.title"></h2>
+        <p class="lede" data-text="story.sub"></p>
+        <p class="scroll-cue typed">scroll <span>→</span></p>
+      </div>
+      <div class="story__viewport">
+        <div class="story__track" id="storyTrack"></div>
+      </div>
+    </section>
+
+    <!-- Open when -->
+    <section class="section section--openwhen" id="openwhen">
+      <p class="eyebrow">chapter three</p>
+      <h2 class="display" data-text="openWhen.title"></h2>
+      <p class="lede" data-text="openWhen.sub"></p>
+      <div class="envelopes" id="envelopes"></div>
+    </section>
+
+    <!-- Closing -->
+    <section class="section section--closing" id="closing">
+      <div class="closing__stick">
+        <div class="closing" id="closingText"></div>
+        <button type="button" class="btn btn--ghost" id="againBtn"></button>
+        <p class="footer typed" data-text="closing.footer"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo" hidden>
+    <button class="lightbox__close" data-close aria-label="Close">×</button>
+    <button class="lightbox__nav lightbox__nav--prev" data-prev aria-label="Previous photo">‹</button>
+    <figure class="lightbox__frame">
+      <img alt="">
+      <figcaption><span class="lightbox__tag typed"></span><span class="lightbox__cap"></span></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" data-next aria-label="Next photo">›</button>
+  </div>
+
+  <!-- Letter modal -->
+  <div class="modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <article class="paper paper--lined modal__letter">
+      <button class="modal__close" data-close aria-label="Close letter">×</button>
+      <p class="modal__kicker typed">open when…</p>
+      <h3 class="modal__title" id="modalTitle"></h3>
+      <div class="modal__body"></div>
+      <p class="modal__sign signature">Rumman</p>
+    </article>
+  </div>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- shared SVG symbols -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="flower" viewBox="0 0 120 200">
+        <path d="M60 196 C58 150 64 110 58 70" fill="none" stroke="#6b6b3a" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M59 140 C40 128 28 132 18 120 C34 116 48 122 59 136Z" fill="#7d7f45" opacity=".8"/>
+        <path d="M61 112 C78 100 92 104 102 92 C86 88 72 96 61 108Z" fill="#7d7f45" opacity=".75"/>
+        <g transform="translate(58 52)">
+          <ellipse rx="15" ry="24" fill="#a8374a" opacity=".85" transform="rotate(-30)"/>
+          <ellipse rx="15" ry="24" fill="#b9475a" opacity=".85" transform="rotate(30)"/>
+          <ellipse rx="13" ry="22" fill="#c45b6c" opacity=".9" transform="rotate(90)"/>
+          <ellipse rx="12" ry="20" fill="#9a2c3f" opacity=".9"/>
+          <circle r="7" fill="#7a1f2e"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vendor/SplitText.min.js"></script>
+  <script src="js/vendor/lenis.min.js"></script>
+  <script>
+    // Safety net: if the page hasn't started after 15s (bad connection), offer a retry instead of a stuck loader.
+    setTimeout(function () {
+      if (document.body.dataset.stage !== 'loading') return;
+      var t = document.querySelector('.loader__text');
+      t.textContent = 'the candle is taking a while… tap to try again';
+      document.getElementById('loader').addEventListener('click', function () { location.reload(); });
+    }, 15000);
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
