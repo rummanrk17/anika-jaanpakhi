@@ -6,7 +6,7 @@
 export default {
   name: 'Anika',
   from: 'Rumman',
-  age: 22,
+  age: 23,
 
   // Her birthday, midnight Dhaka time. Before this moment she sees the countdown.
   unlockAt: '2026-10-21T00:00:00+06:00',
@@ -23,7 +23,7 @@ export default {
     kicker: 'a letter, sealed for',
     sealed: 'Not yet, my love…',
     sealedSub: 'Some letters can only be opened on the right day.',
-    sealedFoot: '22 years of you, almost. Come back at midnight.',
+    sealedFoot: '23 years of you, almost. Come back at midnight.',
     lockedTitle: 'It’s your day.',
     lockedSub: 'Before the seal breaks, one question only you can answer —',
     readyTitle: 'Welcome back, birthday girl.',
@@ -34,7 +34,7 @@ export default {
     place: '21 October 2026',
     greeting: 'My dearest Anika,',
     paragraphs: [
-      'Happy birthday, my love. Twenty-two years ago today the world got a little softer, a little brighter, though neither of us knew it yet but my life got its favourite person.',
+      'Happy birthday, my love. Twenty-three years ago today the world got a little softer, a little brighter, though neither of us knew it yet but my life got its favourite person.',
       'I hate that I can’t be next to you today. I can’t hand you a rose, or watch you and just keep watching you givng all my love and attention. I miss you even now laughing at my terrible jokes in person. Situation, timing and everything else keep us apart for now... so I made you this instead. A letter you can open, re-read, and come back to whenever you want me close.',
       'I’ll be away and offline today, but please don’t read that as absence. Every part of this was made thinking of you: every photo chosen, every line rewritten until it felt right. If you’re reading this, I’m right here with you, just in a different way.',
       'Thank you for your patience with me, for a kindness that makes everything easier, and for the way you turn an ordinary canteen afternoon into the best part of my week. Thank you for choosing me, again and again.',
@@ -188,7 +188,7 @@ export default {
         label: 'it’s your next birthday',
         tint: 'rose',
         body: [
-          'Happy 23rd, love. If you’re opening this a year from now, I hope we’re closer than we were when I made this — in distance, in plans, in everything.',
+          'Happy 24th, love. If you’re opening this a year from now, I hope we’re closer than we were when I made this — in distance, in plans, in everything.',
           'I hope it was a beautiful year. And I hope this time I get to say it to your face, holding a cake and giving you a kiss.',
           'If not yet, then soon. Either way: I love you one whole year more than I did today.',
         ],
@@ -200,7 +200,7 @@ export default {
     lines: [
       'I’m offline today, but I’m not away.',
       'Every word here is me holding your hand.',
-      'Happy 22nd birthday, Anika.',
+      'Happy 23rd birthday, Anika.',
       'Until the day I can say it in person — every year, for the rest of our lives.',
     ],
     signature: '— Rumman',
